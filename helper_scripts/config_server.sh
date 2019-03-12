@@ -1,7 +1,7 @@
 #!/bin/bash
 
 echo "#################################"
-echo "  Running OVERLOAD SCRIPT config_server.sh"
+echo "  Running config_server.sh"
 echo "#################################"
 sudo su
 
