@@ -83,7 +83,7 @@ SCRIPT
 
 Vagrant.configure("2") do |config|
 
-  simid = 1552330784
+  simid = 1552410886
 
   config.vm.provider "virtualbox" do |v|
     v.gui=false
@@ -99,7 +99,7 @@ Vagrant.configure("2") do |config|
     device.vm.hostname = "oob-mgmt-server" 
     
     device.vm.box = "CumulusCommunity/boot_camp_oob_server"
-    device.vm.box_version = "1.0.0"
+    device.vm.box_version = "1.0.1"
     device.vm.provider "virtualbox" do |v|
       v.name = "#{simid}_oob-mgmt-server"
       v.customize ["modifyvm", :id, '--audiocontroller', 'AC97', '--audio', 'Null']
@@ -1516,7 +1516,7 @@ end
     device.vm.hostname = "server01" 
     
     device.vm.box = "CumulusCommunity/boot_camp_server"
-    device.vm.box_version = "1.0.0"
+    device.vm.box_version = "1.0.2"
     device.vm.provider "virtualbox" do |v|
       v.name = "#{simid}_server01"
       v.customize ["modifyvm", :id, '--audiocontroller', 'AC97', '--audio', 'Null']
@@ -1594,7 +1594,7 @@ end
     device.vm.hostname = "server03" 
     
     device.vm.box = "CumulusCommunity/boot_camp_server"
-    device.vm.box_version = "1.0.0"
+    device.vm.box_version = "1.0.2"
     device.vm.provider "virtualbox" do |v|
       v.name = "#{simid}_server03"
       v.customize ["modifyvm", :id, '--audiocontroller', 'AC97', '--audio', 'Null']
@@ -1672,7 +1672,7 @@ end
     device.vm.hostname = "server02" 
     
     device.vm.box = "CumulusCommunity/boot_camp_server"
-    device.vm.box_version = "1.0.0"
+    device.vm.box_version = "1.0.2"
     device.vm.provider "virtualbox" do |v|
       v.name = "#{simid}_server02"
       v.customize ["modifyvm", :id, '--audiocontroller', 'AC97', '--audio', 'Null']
@@ -1750,7 +1750,7 @@ end
     device.vm.hostname = "server04" 
     
     device.vm.box = "CumulusCommunity/boot_camp_server"
-    device.vm.box_version = "1.0.0"
+    device.vm.box_version = "1.0.2"
     device.vm.provider "virtualbox" do |v|
       v.name = "#{simid}_server04"
       v.customize ["modifyvm", :id, '--audiocontroller', 'AC97', '--audio', 'Null']
