@@ -82,7 +82,7 @@ nohup bash -c 'sleep 10; shutdown now -r "Rebooting to Remap Interfaces"' &
 SCRIPT
 
 Vagrant.configure("2") do |config|
-
+  VAGRANT_COMMAND = ARGV[0]
   simid = 1552419736
 
   config.vm.provider "virtualbox" do |v|
@@ -98,8 +98,11 @@ Vagrant.configure("2") do |config|
     
     device.vm.hostname = "oob-mgmt-server" 
     
-    device.vm.box = "CumulusCommunity/boot_camp_oob_server"
-    device.vm.box_version = "1.0.2"
+    device.vm.box = "generic/ubuntu1804"
+
+    if VAGRANT_COMMAND == "ssh" or VAGRANT_COMMAND == "scp"
+      device.ssh.username = "cumulus"
+    end
     device.vm.provider "virtualbox" do |v|
       v.name = "#{simid}_oob-mgmt-server"
       v.customize ["modifyvm", :id, '--audiocontroller', 'AC97', '--audio', 'Null']

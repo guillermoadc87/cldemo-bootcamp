@@ -50,6 +50,20 @@ restrict ::1
 interface listen eth1
 EOT
 
+echo " ### Updating APT Repository... ###"
+export DEBIAN_FRONTEND=noninteractive
+
+echo "Add Cumulus Apps Pubkey"
+wget -q -O- https://apps3.cumulusnetworks.com/setup/cumulus-apps-deb.pubkey | apt-key add - 2>&1
+
+echo "Adding Cumulus Apps Repo"
+echo "deb http://apps3.cumulusnetworks.com/repos/deb bionic netq-latest" > /etc/apt/sources.list.d/netq.list
+
+apt-get update -y
+
+echo " ### Installing Packages... ###"
+apt-get install -y htop isc-dhcp-server tree apache2 git python-pip python3-pip dnsmasq apt-cacher-ng lldpd ntp ifupdown2 cumulus-netq
+
 echo " ### Pushing Ansible Hosts File ###"
 mkdir -p /etc/ansible
 cat << EOT > /etc/ansible/hosts
@@ -181,8 +195,7 @@ group {
 EOT
 
 chmod 755 -R /etc/dhcp/*
-systemctl enable dhcpd
-systemctl restart dhcpd
+systemctl restart isc-dhcp-server
 
 echo " ### Push Hosts File ###"
 cat << EOT > /etc/hosts
@@ -212,6 +225,10 @@ cat << EOT > /etc/hosts
 ff02::1 ip6-allnodes
 ff02::2 ip6-allrouters
 EOT
+
+echo " ### Creating cumulus user ###"
+useradd -m cumulus -c "Cumulus User" -s /bin/bash
+echo 'cumulus:CumulusLinux!' | chpasswd
 
 echo " ### Creating SSH keys for cumulus user ###"
 mkdir -p /home/cumulus/.ssh
